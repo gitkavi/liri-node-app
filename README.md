@@ -8,16 +8,13 @@ LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and R
 2. `node liri.js spotify-this-song '<song name here>'`
 
    * This will show the following information about the song in your terminal/bash window
-     
-     * Artist(s)
-     
-     * The song's name
-     
-     * A preview link of the song from Spotify
-     
-     * The album that the song is from
-
-   * If no song is provided then your program will default to "The Sign" by Ace of Base.
+        ``` 
+        * Artist(s)
+        * The song's name 
+        * A preview link of the song from Spotify 
+        * The album that the song is from
+        ```
+   * If no song is provided then your program will default to **"The Sign"** by Ace of Base.
 3. `node liri.js movie-this '<movie name here>'`
 
    * This will output the following information to your terminal/bash window:
@@ -33,11 +30,11 @@ LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and R
        * Actors in the movie.
      ```
 
-   * If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
-     
-     * If you haven't watched "Mr. Nobody," then you should: <http://www.imdb.com/title/tt0485947/>
-     
+   * If the user doesn't type a movie in, the program will output data for the movie **'Mr. Nobody'**
+     ```
+     * If you haven't watched "Mr. Nobody," then you should: <http://www.imdb.com/title/tt0485947/> 
      * It's on Netflix!
+     ```
 4. `node liri.js do-what-it-says`
 
     * LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
