@@ -49,17 +49,17 @@ function my_Tweets() {
 
 function spotify_this_song() {
     if (!songName) {
-        spotify.search({ type: "album,track", query: "The Sign", limit: 5 }, function (err, data) {
+        spotify.search({ type: "track", query: "The Sign", limit: 5 }, function (err, data) {
             if (!err) {
-                for (var i = 0; i < data.albums.items.length; i++) {
+                for (var i = 0; i < data.tracks.items.length; i++) {
                     console.log("\nAlbum Name: ", data.albums.items[i].name);
                     console.log("Artist(s):");
-                    for (var j = 0; j < data.albums.items[i].artists.length; j++) {
-                        console.log(data.albums.items[i].artists[j].name);
+                    for (var j = 0; j < data.tracks.items[i].artists.length; j++) {
+                        console.log(data.tracks.items[i].artists[j].name);
                     }
-                    console.log("External Link: ", data.albums.items[i].external_urls.spotify, "\n");
+                    console.log("Preview Link: ",data.tracks.items[i].preview_url);
+                    console.log("External Link: ", data.tracks.items[i].external_urls.spotify, "\n");
                 }
-                //console.log(data.albums.items[0]);
             }
             else {
                 return console.log('Error occurred: ' + err);
@@ -67,18 +67,20 @@ function spotify_this_song() {
         });
     }
     else {
-        spotify.search({ type: "album,track", query: songName, limit: 5 }, function (err, data) {
+
+        spotify.search({ type: "track", query: songName, limit: 5 }, function (err, data) {
             if (!err) {
-                for (var i = 0; i < data.albums.items.length; i++) {
-                    console.log("\Song Name: ", data.albums.items[i].name);
-                    console.log("Artist(s):");
-                    for (var j = 0; j < data.albums.items[i].artists.length; j++) {
-                        // var artists = [];
-                        console.log(data.albums.items[i].artists[j].name);
+                for (var i = 0; i < data.tracks.items.length; i++) {
+                    console.log("\nAlbum name: ",data.tracks.items[i].album.name);
+                    console.log("Song Name: ", data.tracks.items[i].name);
+                    var artists =[];
+                    for (var j = 0; j < data.tracks.items[i].artists.length; j++) {
+                        artists.push(data.tracks.items[i].artists[j].name);
                     }
-                    console.log("External Link: ", data.albums.items[i].external_urls.spotify, "\n");
+                    console.log("Artist(s): ",artists.join(","));
+                    console.log("Preview Link: ",data.tracks.items[i].preview_url);
+                    console.log("External Link: ", data.tracks.items[i].external_urls.spotify, "\n");
                 }
-                // console.log(data.albums.items[0]);
             }
             else {
                 return console.log('Error occurred: ' + err);
