@@ -1,4 +1,5 @@
 require("dotenv").config();
+var fs = require("fs");
 
 var fs = require("fs");
 var request = require("request");
@@ -25,21 +26,19 @@ else if (operation === "spotify-this-song") {
     spotify_this_song();
 }
 else if (operation === "movie-this") {
-    // console.log(queryUrl);
     movie_this();
 }
 else if (operation === "do-what-it-says") {
     do_what_it_says();
 }
 
-
 function my_Tweets() {
     client.get('statuses/user_timeline', { count: 20 }, function (error, tweets, response) {
         if (!error) {
             for (var i = 0; i < tweets.length; i++) {
-                console.log("\nText: ", tweets[i].text);
-                console.log("Created at: ", tweets[i].created_at);
+                console.log("\nText: ", tweets[i].text +"\nCreated at: ", tweets[i].created_at);
             }
+            
         }
         else {
             return console.log(error);
@@ -52,11 +51,13 @@ function spotify_this_song() {
         spotify.search({ type: "track", query: "The Sign", limit: 5 }, function (err, data) {
             if (!err) {
                 for (var i = 0; i < data.tracks.items.length; i++) {
-                    console.log("\nAlbum Name: ", data.albums.items[i].name);
-                    console.log("Artist(s):");
+                    console.log("\nAlbum name: ",data.tracks.items[i].album.name);
+                    console.log("Song Name: ", data.tracks.items[i].name);
+                    var artists =[];
                     for (var j = 0; j < data.tracks.items[i].artists.length; j++) {
-                        console.log(data.tracks.items[i].artists[j].name);
+                        artists.push(data.tracks.items[i].artists[j].name);
                     }
+                    console.log("Artist(s): ",artists.join(","));
                     console.log("Preview Link: ",data.tracks.items[i].preview_url);
                     console.log("External Link: ", data.tracks.items[i].external_urls.spotify, "\n");
                 }
